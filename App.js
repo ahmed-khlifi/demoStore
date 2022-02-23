@@ -6,12 +6,13 @@ import AddCategoryProductScreen from "./app/screens/AddCategoryProductScreen";
 import HomeScreen from "./app/screens/HomeScreen";
 
 import AuthNavigation from "./app/navigation/AuthNavigation";
+import AppNavigation from "./app/navigation/AppNavigation";
 
 export default function App() {
   return (
     <Safe>
       <NavigationContainer theme={MyTheme}>
-        <HomeScreen />
+        <AppNavigation />
       </NavigationContainer>
     </Safe>
   );
