@@ -8,6 +8,7 @@ import InputField from "../components/InputField";
 import Radio from "../components/Radio";
 import colors from "../config/colors";
 import style from "../config/styles";
+import apiClient from "../api/user";
 
 function RegisterScreen({ navigation }) {
   const initialValues = {
@@ -35,7 +36,11 @@ function RegisterScreen({ navigation }) {
         <Form
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={(values) => console.log(values)}
+          onSubmit={async ({ displayName: name, email, password }) => {
+            const result = await apiClient.register({ name, email, password });
+            if (result.ok) return console.log(result.data);
+            console.log(result.data.error);
+          }}
         >
           <InputField
             placeholder="Your display name"

@@ -28,9 +28,12 @@ function Radio({ name }) {
         boxStyle={{ width: "30%", marginTop: 0 }}
         data={data}
         textStyle={{ marginLeft: 15, fontSize: 16, color: colors.black }}
-        selectedBtn={(e) => setFieldValue("gender", e.accessibilityLabel)}
+        selectedBtn={(e) => {
+          /* setFieldTouched("gender", true); */
+          setFieldValue("gender", e.accessibilityLabel);
+        }}
       />
-      <FormError isVisible={true}>{errors[name]}</FormError>
+      <FormError isVisible={touched}>{errors[name]}</FormError>
     </View>
   );
 }
