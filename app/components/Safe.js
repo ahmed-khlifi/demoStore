@@ -14,7 +14,7 @@ function AddCategory({ children, style }) {
 
 const styles = StyleSheet.create({
   screen: {
-    margin: 20,
+    margin: 10,
     paddingTop: Constants.statusBarHeight,
     flex: 1,
   },
