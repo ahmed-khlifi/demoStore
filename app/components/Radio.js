@@ -1,43 +1,45 @@
-import React, { useState } from "react";
-import RadioGroup from "react-native-radio-buttons-group";
-import { StyleSheet } from "react-native";
+import RadioButtonRN from "radio-buttons-react-native";
+import { useFormikContext } from "formik";
+import { View, StyleSheet } from "react-native";
 
 import colors from "../config/colors";
+import FormError from "./FormError";
 
-const radioButtonsData = [
+const data = [
   {
-    id: "1", // acts as primary key, should be unique and non-empty string
     label: "Male",
-    value: "male",
+    accessibilityLabel: "male",
   },
   {
-    id: "2",
     label: "Female",
-    value: "female",
+    accessibilityLabel: "female",
   },
 ];
 
-export default function Radio() {
-  const [radioButtons, setRadioButtons] = useState(radioButtonsData);
-
-  function onPressRadioButton(radioButtonsArray) {
-    setRadioButtons(radioButtonsArray);
-  }
+function Radio({ name }) {
+  const { setFieldValue, touched, setFieldTouched, errors } =
+    useFormikContext();
 
   return (
-    <RadioGroup
-      radioButtons={radioButtons}
-      borderColor={colors.light}
-      color={colors.primary}
-      containerStyle={styles.radio}
-      onPress={onPressRadioButton}
-    />
+    <View style={styles.radioField}>
+      <RadioButtonRN
+        box={false}
+        style={{ flexDirection: "row", width: "100%" }}
+        boxStyle={{ width: "30%", marginTop: 0 }}
+        data={data}
+        textStyle={{ marginLeft: 15, fontSize: 16, color: colors.black }}
+        selectedBtn={(e) => setFieldValue("gender", e.accessibilityLabel)}
+      />
+      <FormError isVisible={true}>{errors[name]}</FormError>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  radio: {
-    flexDirection: "row",
-    borderColor: colors.primary,
+  radioField: {
+    width: "100%",
+    marginVertical: 5,
   },
 });
+
+export default Radio;

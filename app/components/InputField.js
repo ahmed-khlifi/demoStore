@@ -6,7 +6,6 @@ import Input from "./Input";
 
 function InputField({ isVisible, errorMessage, name, ...other }) {
   const { handleChange, touched, setFieldTouched, errors } = useFormikContext();
-
   return (
     <>
       <Input

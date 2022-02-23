@@ -2,8 +2,10 @@ import React from "react";
 import { Text, StyleSheet } from "react-native";
 import colors from "../config/colors";
 
-function FormError({ children, isVisible }) {
-  return isVisible ? <Text style={styles.error}>{children}</Text> : null;
+function FormError({ children, isVisible, style }) {
+  return isVisible ? (
+    <Text style={[styles.error, style]}>{children}</Text>
+  ) : null;
 }
 
 const styles = StyleSheet.create({
