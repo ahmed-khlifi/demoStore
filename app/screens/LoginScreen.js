@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import React, { useContext, useState } from "react";
+import { View, StyleSheet, Text, Button } from "react-native";
 import * as Yup from "yup";
 
 import apiClient from "../api/auth";
@@ -9,6 +9,9 @@ import InputField from "../components/InputField";
 import FormButton from "../components/FormButton";
 import Form from "../components/Form";
 import FormError from "../components/FormError";
+import authStorage from "../auth/storage";
+import AuthContext from "../auth/authContext";
+import useAuth from "../auth/useAuth";
 
 const initialValues = {
   email: "",
@@ -21,11 +24,13 @@ const validationSchema = Yup.object().shape({
 
 function LoginScreen({ navigation }) {
   const [error, setError] = useState(false);
+  const { login } = useAuth();
   // login
   const handleSubmit = async ({ email, password }) => {
     const result = await apiClient.login(email, password);
-    if (result.ok) console.log(result.data);
-    else setError(true);
+    if (result.ok) {
+      login(result.data);
+    } else setError(true);
   };
 
   return (

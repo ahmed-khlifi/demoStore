@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
+import OrderContext from "../context/OrderContext";
 import colors from "../config/colors";
 
 import Button from "./Button";
 
-function ProductCard(props) {
+function ProductCard() {
+  const { orders, setOrders } = useContext(OrderContext);
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={require("../assets/product.jpg")} />
@@ -20,6 +22,7 @@ function ProductCard(props) {
           style={{ width: "100%" }}
           textStyle={{ fontSize: 14 }}
           title="add to card"
+          onPress={() => setOrders([...orders, "item" + Math.random()])}
         />
       </View>
     </View>
